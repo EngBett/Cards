@@ -1,0 +1,3 @@
+﻿cd Cards.Infrastructure
+dotnet ef --startup-project ../Cards.Api/ migrations add InitialMigration
+dotnet ef --startup-project ../Cards.Api/ database update

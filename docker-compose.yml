@@ -1,0 +1,36 @@
+version: '3.4'
+
+name: logicea-cards
+
+services:
+  db:
+    container_name: mssql
+    image: mcr.microsoft.com/azure-sql-edge
+    restart: always
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: ${MSSQL_PASSWORD}
+      ACCEPT_EULA: "Y"
+
+  seq:
+    container_name: Seq
+    image: datalust/seq:latest
+    ports:
+      - 5341:80
+    environment:
+      - ACCEPT_EULA=Y
+      - WEBSITES_PORT=80:5341
+
+  cards.api:
+    container_name: cards.api
+    image: cards.api:latest
+    depends_on:
+      - db
+      - seq
+    build: 
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+ 
