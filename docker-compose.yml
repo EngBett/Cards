@@ -25,6 +25,7 @@ services:
   cards.api:
     container_name: cards.api
     image: cards.api:latest
+    restart: always
     depends_on:
       - db
       - seq
