@@ -17,6 +17,8 @@ You can then access the application via:
 
 ### Windows
 
+Requires ```.net8 sdk``` installed
+
 This project is best suited for MSSQL database because it has a stored procedure that is best translates by mssql.
 
 To run this, open ```AppSettings.Development.json``` and replace the value ``DATABASE_CONNECTION`` with your mssql connection string.
@@ -27,6 +29,12 @@ From :
 
 To:
 ```"DATABASE_CONNECTION": "Server=localhost,1433;Database=Cards;TrustServerCertificate=True;",```
+
+After making the above change, open your terminal and navigate to `Cards/Cards.Api/` and run the following command:
+
+`dotnet run`
+
+Access the APIs documentation by navigating to: ```https://localhost:7200/swagger/index.html```
 
 ## Test users
 
@@ -48,7 +56,5 @@ The system by default creates 4 users: 1 admin user and 3 member users all with 
 2. user.test@cards.dev
 3. test.user@cards.dev
 ```
-
-Access the APIs on the root url ```/swagger/index.html```
 
 🥂
