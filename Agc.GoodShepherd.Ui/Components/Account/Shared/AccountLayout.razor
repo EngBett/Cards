@@ -1,0 +1,37 @@
+﻿@inherits LayoutComponentBase
+@layout Layout.MainLayout
+@inject NavigationManager NavigationManager
+
+<HeadContent>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css"/>
+    <link rel="stylesheet" href="app.css"/>
+    <link rel="stylesheet" href="Laundry.Ui.styles.css"/>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+</HeadContent>
+
+@if (HttpContext is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    @Body
+}
+
+@code {
+
+    [CascadingParameter]
+    private HttpContext? HttpContext { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (HttpContext is null)
+        {
+    // If this code runs, we're currently rendering in interactive mode, so there is no HttpContext.
+    // The identity pages need to set cookies, so they require an HttpContext. To achieve this we
+    // must transition back from interactive mode to a server-rendered page.
+            NavigationManager.Refresh(forceReload: true);
+        }
+    }
+
+}
