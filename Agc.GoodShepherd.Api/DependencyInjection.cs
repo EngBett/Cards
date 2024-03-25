@@ -22,7 +22,7 @@ public static class DependencyInjection
 
         services.AddControllers(opt => { opt.Filters.Add(typeof(GlobalExceptionFilter)); }).AddFluentValidation()
             .AddJsonOptions(o => o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
-        ////////
+        ////////kkk
 
         services.AddHttpContextAccessor();
         services.AddCors(options =>
