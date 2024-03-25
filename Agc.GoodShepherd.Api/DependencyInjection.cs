@@ -89,6 +89,7 @@ public static class DependencyInjection
         app.UseSwaggerUI();
 
         //app.UseHttpsRedirection();
+        
         app.UseCors("CorsPolicy");
         app.UseAuthentication();
         app.UseAuthorization();
