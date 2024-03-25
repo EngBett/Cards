@@ -53,7 +53,6 @@ public static class DependencyInjection
         services.AddInfrastructureDependencies();
 
         services.AddEndpointsApiExplorer();
-        //
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "AGC GoodShepherd Church", Version = "v1" });
