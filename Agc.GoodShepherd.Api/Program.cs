@@ -21,4 +21,5 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.ConfigureMiddleware();
+
 app.Run();
