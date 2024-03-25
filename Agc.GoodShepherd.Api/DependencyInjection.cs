@@ -18,7 +18,7 @@ public static class DependencyInjection
 {
     public static void ConfigureServices(this IServiceCollection services, IConfiguration config)
     { 
-        services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
+        services.Configure<RouteOptions>(options => options.LowercaseUrls = true);//
 
         services.AddControllers(opt => { opt.Filters.Add(typeof(GlobalExceptionFilter)); }).AddFluentValidation()
             .AddJsonOptions(o => o.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull);
