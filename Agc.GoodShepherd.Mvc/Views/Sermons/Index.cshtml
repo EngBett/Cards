@@ -1,0 +1,75 @@
+﻿@model PagedResult<IEnumerable<SermonDm>>
+
+@{
+    ViewBag.PageTitle = PageTitles.Sermons.ToString();
+    ViewBag.PageHeadline = "Sermons";
+    ViewBag.PageSubHeadline = "";
+}
+
+<!-- Row -->
+<div class="row">
+
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+
+            <!-- Headline -->
+            <div class="headline">
+                <h3><i class="icon-material-outline-business-center"></i> Sermon Listings</h3>
+            </div>
+
+            <div class="content">
+                <ul class="dashboard-box-list">
+                    @if (Model != null && Model.DataList != null)
+                    {
+                        foreach (var sermon in Model.DataList)
+                        {
+                            <li>
+                                <!-- Job Listing -->
+                                <div class="job-listing">
+
+                                    <!-- Job Listing Details -->
+                                    <div class="job-listing-details">
+
+                                        <!-- Logo -->
+                                        @*<a href="#" class="job-listing-company-logo">
+                                            <img src="~/images/company-logo-05.png" alt="">
+                                        </a>*@
+
+                                        <!-- Details -->
+                                        <div class="job-listing-description">
+                                            <h3 class="job-listing-title">
+                                                <a asp-controller="Sermons" asp-action="Show" asp-route-id="@sermon.Id">@sermon.Title</a>
+                                            </h3>
+
+                                            <!-- Job Listing Footer -->
+                                            <div class="job-listing-footer">
+                                                <ul>
+                                                    <li><i class="icon-material-outline-date-range"></i> @sermon.SermonDate.ToString("dd MMMM, yyyy")</li>
+                                                    <li><i class="icon-feather-user"></i> @sermon.Minister</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Buttons -->
+                                <div class="buttons-to-right always-visible">
+                                    <a asp-controller="Sermons" asp-action="Show" asp-route-id="@sermon.Id" class="button ripple-effect"> View</a>
+                                    <a asp-controller="Sermons" asp-action="Show" asp-route-id="@sermon.Id" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top">
+                                        <i class="icon-feather-edit"></i>
+                                    </a>
+                                    <a asp-controller="Sermons" asp-action="D" asp-route-id="@sermon.Id" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top">
+                                        <i class="icon-feather-trash-2"></i>
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Row / End -->

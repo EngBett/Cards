@@ -11,7 +11,7 @@ namespace Agc.GoodShepherd.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.MigrateSqlScripts();
+            //migrationBuilder.MigrateSqlScripts();
         }
 
         /// <inheritdoc />

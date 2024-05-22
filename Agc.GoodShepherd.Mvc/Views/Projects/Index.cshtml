@@ -1,0 +1,117 @@
+@model ProjectsPageViewModel
+@{
+    Layout = "_MainLayout";
+    ViewBag.PageTitle = PageTitles.Projects.ToString();
+}
+
+<!-- Spacer -->
+<div class="margin-top-90"></div>
+<!-- Spacer / End-->
+
+<!-- Page Content-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 content-left-offset">
+
+            <h3 class="page-title">Search Results</h3>
+
+            <div class="notify-box margin-top-15">
+                <div class="switch-container">
+                    <label class="switch">
+                        <input type="checkbox"><span class="switch-button"></span><span class="switch-text">Turn on email alerts for this search</span>
+                    </label>
+                </div>
+
+                <div class="sort-by">
+                    <span>Sort by:</span>
+                    <select class="selectpicker hide-tick">
+                        <option>Relevance</option>
+                        <option>Newest</option>
+                        <option>Oldest</option>
+                        <option>Random</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="listings-container margin-top-35">
+
+                @if (Model.Projects != null && Model.Projects.DataList.Any())
+                {
+                    foreach (var project in Model.Projects.DataList)
+                    {
+                        <!-- Job Listing -->
+                        <a asp-controller="Projects" asp-action="Show" asp-all-route-data="@(new Dictionary<string, string>() { { "ProjectId", project.Id } })" class="job-listing">
+
+                            <!-- Job Listing Details -->
+                            <div class="job-listing-details">
+                                <!-- Logo -->
+                                <div class="job-listing-company-logo">
+                                    <img src="~/images/company-logo-placeholder.png" alt="">
+                                </div>
+
+                                <!-- Details -->
+                                <div class="job-listing-description">
+                                    <h4 class="job-listing-company"> @project.Subtitle@*<span class="verified-badge" title="Verified Employer" data-tippy-placement="top"></span>*@</h4>
+                                    <h3 class="job-listing-title">@project.Title</h3>
+                                    <p class="job-listing-text">@project.Body.Replace("<p>","")[..120] ...</p>
+                                </div>
+
+                                <!-- Bookmark -->
+                                <span class="bookmark-icon"></span>
+                            </div>
+
+                            <!-- Job Listing Footer -->
+                            <div class="job-listing-footer">
+                                <ul>
+                                    <li><i class="icon-material-outline-account-balance-wallet"></i> KES. @project.TargetAmount.ToString("N2")</li>
+                                    <li><i class="icon-material-outline-access-time"></i> 2 days ago</li>
+                                </ul>
+                            </div>
+                        </a>
+                    }
+
+                    <!-- Pagination -->
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Pagination -->
+                            <div class="pagination-container margin-top-30 margin-bottom-60">
+                                <nav class="pagination">
+                                    <ul>
+                                        <li class="pagination-arrow">
+                                            <a href="#">
+                                                <i class="icon-material-outline-keyboard-arrow-left"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="current-page">2</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">3</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">4</a>
+                                        </li>
+                                        <li class="pagination-arrow">
+                                            <a href="#">
+                                                <i class="icon-material-outline-keyboard-arrow-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination / End -->
+                }
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -23,5 +23,6 @@
         {
             return @object.GetType().GetGenericTypeName();
         }
+        
     }
 }

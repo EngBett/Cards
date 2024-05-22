@@ -1,0 +1,213 @@
+@model ShowProjectPageViewModel
+@{
+    Layout = "_MainLayout";
+    ViewBag.PageTitle = PageTitles.Projects.ToString();
+}
+
+<!-- Titlebar
+================================================== -->
+<div class="single-page-header" data-background-image="/images/single-job.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-page-header-inner">
+                    <div class="left-side">
+                        <div class="header-image">
+                            <a href="">
+                                <img src="~/images/company-logo-placeholder.png" alt="">
+                            </a>
+                        </div>
+                        <div class="header-details">
+                            <h3>@Model.Project.Title</h3>
+                            <h5>@Model.Project.Subtitle</h5>
+                        </div>
+                    </div>
+                    <div class="right-side">
+                        <div class="salary-box">
+                            <div class="salary-type">Target Amount</div>
+                            <div class="salary-amount">KES. @Model.Project.TargetAmount.ToString("N2")</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Page Content
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Content -->
+        <div class="col-xl-8 col-lg-8 content-right-offset">
+
+            <div class="single-page-section">
+                <h3 class="margin-bottom-25">Description</h3>
+                @Html.Raw(Model.Project.Body)
+            </div>
+        </div>
+
+
+        <!-- Sidebar -->
+        <div class="col-xl-4 col-lg-4">
+            <div class="sidebar-container">
+
+                <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim"> Give Support <i class="icon-material-outline-arrow-right-alt"></i></a>
+
+                <!-- Sidebar Widget -->
+                <div class="sidebar-widget">
+                    <div class="job-overview">
+                        <div class="job-overview-headline"><i class="icon-feather-shopping-cart"></i> &nbsp; Merchandise</div>
+                        <div class="job-overview-inner">
+                            <ul>
+                                @foreach (var category in Model.Project.Categories)
+                                {
+                                    <li>
+                                        <a href="">
+                                            <i class="icon-material-outline-arrow-right-alt"></i>
+                                            <span>@category.Name</span>
+                                            <h5>@category.Stock</h5>
+                                        </a>
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Widget -->
+                <div class="sidebar-widget">
+                    <h3>Share</h3>
+
+                    <!-- Copy URL -->
+                    <div class="copy-url">
+                        <input id="copy-url" type="text" value="" class="with-border">
+                        <button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top">
+                            <i class="icon-material-outline-file-copy"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Dialogs
+{
+    <div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form" id="app">
+
+            <ul class="popup-tabs-nav">
+                <li>
+                    <a href="#tab">Give</a>
+                </li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div class="popup-tab-content" id="tab">
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Give via mpesa</h3>
+                    </div>
+
+                    <div class="notification notice closeable" v-if="stkLoading">
+                        <p>{{message}}</p>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center" v-if="stkLoading">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" width="100" height="100" style="shape-rendering: auto; display: block; background: rgb(255, 255, 255);" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g>
+                                <circle stroke-linecap="round" fill="none" stroke-dasharray="50.26548245743669 50.26548245743669" stroke="#719bfe" stroke-width="8" r="32" cy="50" cx="50">
+                                    <animateTransform values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" repeatCount="indefinite" type="rotate" attributeName="transform"></animateTransform>
+                                </circle><g></g>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="input-with-icon-left" v-if="!stkLoading">
+                        <i class="icon-line-awesome-mobile"></i>
+                        <input type="text" class="input-text with-border" v-model="phoneNumber" id="phoneNumber" placeholder="Phone number e.g. +254712345678" required/>
+                        <span v-if="errorPhone!==''" style="color: red">{{errorPhone}}</span>
+                    </div>
+
+                    <div class="input-with-icon-left" v-if="!stkLoading">
+                        <i class="">KES</i>
+                        <input type="number" class="input-text with-border" v-model="amount" id="amount" placeholder="Amount in KES" required/>
+                        <span v-if="errorAmount!==''" style="color: red">{{errorAmount}}</span>
+                    </div>
+
+                    <!-- Button -->
+                    <button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="button" v-on:click="triggerStk()" v-if="!stkLoading">
+                        <span v-if="!loading">Proceed <i class="icon-material-outline-arrow-right-alt"></i></span>
+                        <span v-else>Loading...</span>
+                    </button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.0/axios.min.js" integrity="sha512-GHXnNiWBo4rluQ82VYvC5Wx/UnQbfbuzDH0y3jTwXat2rJDpLf1CCclWbINCfbzLFheboOz8NSlrqTKtdyL7hA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    loading: false,
+                    phoneNumber: "",
+                    amount:0,
+                    errorPhone:"",
+                    errorAmount:"",
+                    error:"",
+                    stkLoading:false,
+                    stkSuccess:false,
+                    message:""
+                }
+            },
+            methods:{
+                triggerStk(){
+                    if (this.loading) return;
+                    
+                    this.loading = true;
+                    
+                    if (this.phoneNumber===""||this.phoneNumber.length!==13){
+                        this.errorPhone="Phone number format should be '+254xxxxxxxxx'"
+                        this.loading = false;
+                        return;
+                    }
+
+                    if (this.amount<=0){
+                        this.errorAmount="Amount should be greater than 0"
+                        this.loading = false;
+                        return;
+                    }
+                    
+                    
+
+                    axios.post('/projects/collect',{projectId:'@Model.Project.Id',amount:this.amount,phoneNumber:this.phoneNumber}).then(res => {
+                        console.log(res.data.message);
+                        this.loading=false;
+                        this.stkLoading=true;
+                        this.message=res.data.message;
+                    });
+                    
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+}

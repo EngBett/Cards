@@ -1,0 +1,332 @@
+﻿@model HomePageViewModel
+@{
+    Layout = "_MainLayout";
+    ViewBag.PageTitle = PageTitles.Home.ToString();
+}
+
+<!-- Intro Banner
+================================================== -->
+<div class="intro-banner dark-overlay big-padding">
+
+    <!-- Transparent Header Spacer -->
+    <div class="transparent-header-spacer"></div>
+
+    <div class="container">
+
+        <!-- Intro Headline -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-headline-alt">
+                    <h3>Good Shepherd AGC</h3>
+                    <span>The whole church, taking the whole gospel to the world</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="intro-banner-search-form margin-top-95">
+
+                    <!-- Search Field -->
+                    <div class="intro-search-field">
+                        <label for="intro-keywords" class="field-title ripple-effect">Need something quick?</label>
+                        <input id="intro-keywords" type="text" placeholder="Keywords ...">
+                    </div>
+
+                    <!-- Button -->
+                    <div class="intro-search-button">
+                        <button class="button ripple-effect" onclick="window.location.href='jobs-list-layout-1.html'">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="intro-stats margin-top-45 hide-under-992px">
+                    <li>
+                        <strong class="counter">1,586</strong>
+                        <span></span>
+                    </li>
+                    <li>
+                        <strong class="counter">3,543</strong>
+                        <span></span>
+                    </li>
+                    <li>
+                        <strong class="counter">1,232</strong>
+                        <span></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Video Container -->
+    <div class="video-container" data-background-image="/images/home-video-background-poster.jpg">
+        <video loop autoplay muted>
+            <source src="/images/home-video-background.mp4" type="video/mp4">
+        </video>
+    </div>
+
+</div>
+
+<!-- Content
+================================================== -->
+<!-- Features Sermons -->
+<div class="section padding-top-65 padding-bottom-75">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+
+                <!-- Section Headline -->
+                <div class="section-headline margin-top-0 margin-bottom-35">
+                    <h3>Recent Sermons</h3>
+                    <a href="" class="headline-link">Browse All Sermons</a>
+                </div>
+
+                <!-- Jobs Container -->
+                <div class="listings-container compact-list-layout margin-top-35">
+
+                    @if (Model.Sermons != null && Model.Sermons.Any())
+                    {
+                        @foreach (var sermon in @Model.Sermons)
+                        {
+                            <!-- Job Listing -->
+                            <a href="" class="job-listing with-apply-button">
+
+                                <!-- Job Listing Details -->
+                                <div class="job-listing-details">
+
+                                    <!-- Logo -->
+                                    <div class="job-listing-company-logo">
+                                        <img src="~/images/user-avatar-placeholder.png" alt="">
+                                    </div>
+
+                                    <!-- Details -->
+                                    <div class="job-listing-description">
+                                        <h3 class="job-listing-title">@sermon.Title</h3>
+
+                                        <!-- Job Listing Footer -->
+                                        <div class="job-listing-footer">
+                                            <ul>
+                                                <li>
+                                                    <i class="icon-feather-user"></i> @sermon.Minister
+                                                </li>
+                                                <li>
+                                                    <i class="icon-material-outline-access-time"></i>
+                                                    @sermon.SermonDate.ToString("dddd dd, MMM yyyy")
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Apply Button -->
+                                    <span class="list-apply-button ripple-effect">View</span>
+                                </div>
+                            </a>
+                        }
+                    }
+
+                </div>
+                <!-- Jobs Container / End -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured Sermons / End -->
+
+
+<!-- Photo Section -->
+<div class="photo-section" data-background-image="/images/section-background.jpg">
+
+    <!-- Infobox -->
+    <div class="text-content white-font">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <h2>Hire experts or be hired. <br> For any job, any time.</h2>
+                    <p>
+                        Bring to the table win-win survival strategies to ensure proactive domination. At the end of the
+                        day, going forward, a new normal that has evolved from generation is on the runway towards.
+                    </p>
+                    <a href="pages-pricing-plans.html"
+                       class="button button-sliding-icon ripple-effect big margin-top-20">
+                        Get Started
+                        <i
+                            class="icon-material-outline-arrow-right-alt">
+                        </i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Infobox / End -->
+
+</div>
+<!-- Photo Section / End -->
+
+<!-- Recent News Posts -->
+<div class="section padding-top-65 padding-bottom-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+
+                <!-- Section Headline -->
+                <div class="section-headline margin-top-0 margin-bottom-45">
+                    <h3>From News</h3>
+                    <a href="" class="headline-link">View News</a>
+                </div>
+
+                <div class="row">
+                    @if (Model.Announcements != null && Model.Announcements.Any())
+                    {
+                        foreach (var announcement in Model.Announcements)
+                        {
+                            <!-- Blog Post Item -->
+                            <div class="col-xl-4">
+                                <a href="" class="blog-compact-item-container">
+                                    <div class="blog-compact-item">
+                                        <img src="/images/blog-01a.jpg" alt="">
+                                        <span class="blog-item-tag">Tips</span>
+                                        <div class="blog-compact-item-content">
+                                            <ul class="blog-post-tags">
+                                                <li>@announcement.DateCreated.ToString("dd MMMM yyyy")</li>
+                                            </ul>
+                                            <h3>@announcement.Title</h3>
+                                            <p>@announcement.SubTitle</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- Blog post Item / End -->
+                        }
+                    }
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Recent News Posts / End -->
+
+<!-- Our Pastors -->
+<div class="section gray padding-top-65 padding-bottom-70 full-width-carousel-fix">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <!-- Section Headline -->
+                <div class="section-headline margin-top-0 margin-bottom-25">
+                    <h3>Our Pastors</h3>
+                </div>
+            </div>
+
+            <div class="col-xl-12">
+                <div class="default-slick-carousel freelancers-container freelancers-grid-layout">
+
+                    <!--Pastor -->
+                    <div class="freelancer">
+                        <!-- Overview -->
+                        <div class="freelancer-overview">
+                            <div class="freelancer-overview-inner">
+
+                                <!-- Avatar -->
+                                <div class="freelancer-avatar">
+                                    <a href="/">
+                                        <img src="images/user-avatar-placeholder.png" alt="">
+                                    </a>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="freelancer-name">
+                                    <h4>
+
+                                        <a href="/">
+                                            Rev. Anthony Bones
+                                        </a>
+                                    </h4>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Pastor / End -->
+
+                    <!--Pastor -->
+                    <div class="freelancer">
+                        <!-- Overview -->
+                        <div class="freelancer-overview">
+                            <div class="freelancer-overview-inner">
+
+                                <!-- Avatar -->
+                                <div class="freelancer-avatar">
+                                    <a href="/">
+                                        <img src="images/user-avatar-placeholder.png" alt="">
+                                    </a>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="freelancer-name">
+                                    <h4>
+
+                                        <a href="/">
+                                            Pst. Moses Ndungu
+                                        </a>
+                                    </h4>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Pastor / End -->
+
+                    <!--Pastor -->
+                    <div class="freelancer">
+                        <!-- Overview -->
+                        <div class="freelancer-overview">
+                            <div class="freelancer-overview-inner">
+
+                                <!-- Avatar -->
+                                <div class="freelancer-avatar">
+                                    <a href="/">
+                                        <img src="images/user-avatar-placeholder.png" alt="">
+                                    </a>
+                                </div>
+
+                                <!-- Name -->
+                                <div class="freelancer-name">
+                                    <h4>
+
+                                        <a href="/">
+                                            Pst. Charity Rotich
+                                        </a>
+                                    </h4>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Pastor / End -->
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Our Pastors / End-->

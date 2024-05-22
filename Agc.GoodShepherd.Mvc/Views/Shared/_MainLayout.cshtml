@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>GoodShepherd AGC - @ViewBag.PageTitle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/colors/blue.css">
+    @await RenderSectionAsync("HeaderScripts", false)
+
+</head>
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper" class="@(ViewBag.PageTitle == PageTitles.Home.ToString() ? "wrapper-with-transparent-header" : "")">
+
+    <!-- Header Container
+    ================================================== -->
+    <header id="header-container" class="fullwidth @(ViewBag.PageTitle == PageTitles.Home.ToString() ? "transparent-header" : "")">
+        <!-- Header -->
+        <partial name="MainLayoutPartials/_PageHeader" model="ViewBag.PageTitle"/>
+        <!-- Header / End -->
+    </header>
+    <div class="clearfix"></div>
+    <!-- Header Container / End -->
+
+
+    @RenderBody()
+
+    <!-- Footer
+    ================================================== -->
+    <partial name="MainLayoutPartials/_PageFooter"/>
+    <!-- Footer / End -->
+
+</div>
+<!-- Wrapper / End -->
+
+@RenderSectionAsync("Dialogs", false)
+
+
+<!-- Scripts
+================================================== -->
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/jquery-migrate-3.3.2.min.js"></script>
+<script src="~/js/mmenu.min.js"></script>
+<script src="~/js/tippy.all.min.js"></script>
+<script src="~/js/simplebar.min.js"></script>
+<script src="~/js/bootstrap-slider.min.js"></script>
+<script src="~/js/bootstrap-select.min.js"></script>
+<script src="~/js/snackbar.js"></script>
+<script src="~/js/clipboard.min.js"></script>
+<script src="~/js/counterup.min.js"></script>
+<script src="~/js/magnific-popup.min.js"></script>
+<script src="~/js/slick.min.js"></script>
+<script src="~/js/custom.js"></script>
+
+<script>
+    $('#snackbar-user-status label').click(function() {
+        Snackbar.show({
+            text: 'Your status has been changed!',
+            pos: 'bottom-center',
+            showAction: false,
+            actionText: "Dismiss",
+            duration: 3000,
+            textColor: '#fff',
+            backgroundColor: '#383838'
+        });
+    });
+</script>
+@RenderSectionAsync("BodyScripts", false)
+
+</body>
+</html>
